@@ -1,121 +1,154 @@
-# Chat Application with PostgreSQL Persistence
 
-A WhatsApp-style chat application with TCP/UDP communication and PostgreSQL database persistence.
+# Aplicación de Chat con Persistencia en PostgreSQL
 
-## Features
+Una aplicación de chat estilo **WhatsApp**, desarrollada en **Java**, con comunicación **TCP/UDP** y persistencia de datos en una **base de datos PostgreSQL local**.
 
-- User registration and authentication
-- Private messaging
-- Group messaging
-- Voice notes (audio messages)
-- Voice calls (UDP)
-- **PostgreSQL database persistence** for:
-  - Users
-  - Messages (private and group)
-  - Groups and memberships
-  - Call history
+## Características
 
-## Database Setup
+* Registro y autenticación de usuarios
+* Mensajería privada
+* Chats grupales
+* Notas de voz (mensajes de audio)
+* Llamadas de voz en tiempo real (UDP)
+* **Persistencia en PostgreSQL** para:
 
-### Prerequisites
+  * Usuarios
+  * Mensajes (privados y grupales)
+  * Grupos y membresías
+  * Historial de llamadas
 
-- PostgreSQL 12 or higher
-- Java 17 or higher
-- Gradle
+---
 
-### Database Configuration
+## Configuración de la Base de Datos
 
-1. **Create the database:**
+### Requisitos previos
 
-\`\`\`bash
-createdb chatdb
-\`\`\`
+* **PostgreSQL** versión 12 o superior
+* **Java 17** o superior
+* **Gradle** instalado
 
-2. **Configure connection (optional):**
+### ⚙️ Configuración básica
 
-The application will automatically create the schema on first run. You can configure the database connection using environment variables:
+Esta aplicación utiliza una **base de datos local** por defecto.
+Es decir, PostgreSQL debe estar instalado y ejecutándose en el mismo computador donde corre el servidor Java.
 
-\`\`\`bash
-export DATABASE_URL="postgres://username:password@localhost:5432/chatdb"
-# OR
-export DB_USER="your_username"
-export DB_PASSWORD="your_password"
-\`\`\`
+1. **Crear la base de datos:**
 
-Default configuration (if no environment variables are set):
-- Host: localhost
-- Port: 5432
-- Database: chatdb
-- User: postgres
-- Password: postgres
+   ```bash
+   createdb chatdb
+   ```
 
-### Database Schema
+2. **Configurar la conexión (opcional):**
 
-The application automatically creates the following tables:
+   Por defecto, la aplicación se conecta usando los siguientes valores:
 
-- **users**: User accounts with online status
-- **groups**: Chat groups
-- **group_members**: Group membership (many-to-many)
-- **messages**: All messages (private and group)
-- **calls**: Call history with duration and status
+   * Host: `localhost`
+   * Puerto: `5432`
+   * Base de datos: `chatdb`
+   * Usuario: `postgres`
+   * Contraseña: `postgres`
 
-## Running the Application
+   Si deseas usar otras credenciales, puedes definirlas mediante variables de entorno:
 
-### Build the project:
+   ```bash
+   export DATABASE_URL="postgres://usuario:contraseña@localhost:5432/chatdb"
+   # O bien:
+   export DB_USER="tu_usuario"
+   export DB_PASSWORD="tu_contraseña"
+   ```
 
-\`\`\`bash
+   La aplicación creará automáticamente las tablas necesarias en el primer inicio.
+
+---
+
+##  Conexión desde otros equipos
+
+Para conectar clientes que se encuentren en **otros computadores**, es necesario que:
+
+1. Todos los equipos estén **en la misma red local (LAN o WiFi)**.
+2. Se conozca la **dirección IP del servidor**, es decir, el computador donde corre el servidor Java y la base de datos PostgreSQL.
+3. En el código o configuración del cliente se reemplace `localhost` por la IP del servidor.
+   Por ejemplo:
+
+   ```java
+   private static final String SERVER_HOST = "192.168.1.10"; // IP del servidor
+   private static final int SERVER_PORT = 5000;
+   ```
+4. PostgreSQL debe permitir conexiones remotas (configurando `postgresql.conf` y `pg_hba.conf` si es necesario).
+
+---
+
+##  Esquema de la Base de Datos
+
+La aplicación crea automáticamente las siguientes tablas:
+
+* **users** → Cuentas de usuario con estado en línea
+* **groups** → Grupos de chat
+* **group_members** → Relaciones de membresía (muchos a muchos)
+* **messages** → Mensajes privados y grupales
+* **calls** → Historial de llamadas con duración y estado
+
+---
+
+##  Ejecución del Proyecto
+
+### 1. Compilar el proyecto
+
+```bash
 ./gradlew build
-\`\`\`
+```
 
-### Run the server:
+### 2. Ejecutar el servidor principal
 
-\`\`\`bash
+```bash
 ./gradlew runServer
-\`\`\`
+```
 
-### Run a client:
+### 3. Ejecutar el servidor de voz (para llamadas)
 
-\`\`\`bash
-./gradlew runClient
-\`\`\`
-
-### Run voice server (for calls):
-
-\`\`\`bash
+```bash
 ./gradlew runVoiceServer
-\`\`\`
+```
 
-## Usage
 
-1. Start the server first
-2. Launch one or more clients
-3. Register or login with a username
-4. Use the menu to:
-   - Send private messages
-   - Create and join groups
-   - Send group messages
-   - Make voice calls
-   - Send voice notes
-   - View message history (persisted in database)
+### 4. Ejecutar un cliente
 
-## Data Persistence
+```bash
+./gradlew runClient
+```
 
-All data is now persisted in PostgreSQL:
+---
 
-- **User accounts** are saved and can be reused across sessions
-- **Message history** is permanently stored and can be retrieved
-- **Group information** and memberships are maintained
-- **Call logs** track all calls with duration and status
+## 💡 Uso
 
-## Architecture
+1. Inicia primero el **servidor principal y el de voz**
+2. Luego ejecuta uno o varios **clientes** (pueden estar en otros equipos de la red local)
+3. Regístrate o inicia sesión con un nombre de usuario
+4. Utiliza el menú para:
 
-- **TCP**: Used for text messages, commands, and signaling
-- **UDP**: Used for real-time voice data during calls
-- **PostgreSQL**: Persistent storage for all application data
-- **HikariCP**: Connection pooling for optimal database performance
+   * Enviar mensajes privados
+   * Crear y unirte a grupos
+   * Enviar mensajes grupales
+   * Realizar llamadas de voz
+   * Enviar notas de voz
+   * Consultar historial de mensajes (guardado en PostgreSQL)
 
-## Environment Variables
+---
 
-- `DATABASE_URL`: Full PostgreSQL connection URL
-- `DB_USER`: Database username (default: postgres)
-- `DB_PASSWORD`: Database password (default: postgres)
+##  Persistencia de Datos
+
+Toda la información se guarda de forma permanente en la base de datos PostgreSQL local:
+
+* **Usuarios** → se conservan entre sesiones
+* **Mensajes** → almacenados y recuperables
+* **Grupos y membresías** → se mantienen activos
+* **Llamadas** → registradas con duración y estado
+
+---
+
+## Arquitectura Técnica
+
+* **TCP** → Para mensajes, comandos y señalización
+* **UDP** → Para audio en tiempo real durante llamadas
+* **PostgreSQL** → Almacenamiento persistente
+* **HikariCP** → Pool de conexiones eficiente a la base de datos
