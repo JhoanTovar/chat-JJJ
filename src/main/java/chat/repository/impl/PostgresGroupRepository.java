@@ -31,7 +31,7 @@ public class PostgresGroupRepository implements GroupRepository {
                 group.setId(rs.getInt("id"));
             }
             
-            // Add creator as first member
+        
             addMember(group.getId(), group.getCreatorId());
             
             return group;
