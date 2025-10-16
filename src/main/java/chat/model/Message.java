@@ -13,8 +13,8 @@ public class Message implements Serializable {
     private int id;
     private int senderId;
     private String senderUsername;
-    private Integer receiverId;  // null para mensajes grupales
-    private Integer groupId;     // null para mensajes privados
+    private Integer receiverId;  
+    private Integer groupId;     
     private String content;
     private MessageType type;
     private LocalDateTime timestamp;
@@ -35,7 +35,7 @@ public class Message implements Serializable {
         this.content = content;
     }
     
-    // Getters y Setters
+ 
     public int getId() {
         return id;
     }
