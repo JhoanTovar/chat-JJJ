@@ -25,27 +25,26 @@ public class PostgresCallRepository implements CallRepository {
         try (Connection conn = dbConfig.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            // 1. Datos básicos del llamante
+        
             stmt.setInt(1, call.getCallerId());
             stmt.setString(2, call.getCallerUsername());
 
-            // 2. Receptor (persona o grupo)
+
             if (call.isGroupCall()) {
                 stmt.setNull(3, Types.INTEGER);
                 stmt.setNull(4, Types.VARCHAR);
-                stmt.setInt(5, call.getReceiverId()); // group_id
+                stmt.setInt(5, call.getReceiverId()); 
             } else {
                 stmt.setInt(3, call.getReceiverId());
                 stmt.setString(4, call.getReceiverUsername());
-                stmt.setNull(5, Types.INTEGER); // no es grupo
+                stmt.setNull(5, Types.INTEGER); 
             }
 
-            // 3. Datos de estado y tiempos
+
             stmt.setBoolean(6, call.isGroupCall());
             stmt.setString(7, call.getStatus().name());
 
 
-            // 4. Fechas y duración (pueden ser nulas)
             if (call.getStartTime() != null) {
                 stmt.setTimestamp(8, Timestamp.valueOf(call.getStartTime()));
 
@@ -62,7 +61,7 @@ public class PostgresCallRepository implements CallRepository {
                 stmt.setNull(10, Types.TIMESTAMP);
             }
 
-            // 5. Ejecutar y recuperar el ID generado
+     
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 call.setCallId(rs.getInt("id"));
@@ -184,7 +183,7 @@ public class PostgresCallRepository implements CallRepository {
                 rs.getInt("caller_id"),
                 rs.getString("caller_username"),
                 rs.getInt("group_id"),
-                "" // Group name not stored in calls table
+                "" 
             );
             call.setGroupCall(true);
         } else {
