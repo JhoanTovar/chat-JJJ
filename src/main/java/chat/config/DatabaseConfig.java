@@ -27,13 +27,13 @@ public class DatabaseConfig {
         // Configuración del pool de conexiones (HikariCP)
         config.setMaximumPoolSize(10);
         config.setMinimumIdle(2);
-        config.setConnectionTimeout(30000); // 30s
-        config.setIdleTimeout(600000);      // 10min
-        config.setMaxLifetime(1800000);     // 30min
+        config.setConnectionTimeout(30000); 
+        config.setIdleTimeout(600000);      
+        config.setMaxLifetime(1800000);     
 
         this.dataSource = new HikariDataSource(config);
 
-        // Inicializar esquema (si tienes schema.sql en resources)
+        // Inicializar esquema
         initializeSchema();
     }
 
