@@ -6,7 +6,7 @@ public class VoiceNoteData {
     private int senderId;
     private int receiverId;
     private Integer groupId;
-    private String audioData; // Base64 encoded
+    private String audioData; 
     private int durationSeconds;
 
     public VoiceNoteData(int senderId, int receiverId, byte[] audioBytes, int durationSeconds) {
