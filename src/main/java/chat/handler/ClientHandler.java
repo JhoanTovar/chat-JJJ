@@ -97,7 +97,7 @@ public class ClientHandler implements Runnable {
                     response = controller.handleSendGroupMessage(groupMessage);
                     send(response);
 
-                    // Notificar a miembros del grupo (implementación simplificada)
+                    // Notificar a miembros del grupo 
                     clientRegistry.notifyGroupMessage(groupMessage, currentUser.getId());
                     break;
 
