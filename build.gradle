@@ -1,0 +1,107 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group = 'chat'
+version = '1.0.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // JSON serialization
+    implementation 'com.google.code.gson:gson:2.11.0'
+    
+    implementation 'org.postgresql:postgresql:42.7.1'
+    
+    implementation 'com.zaxxer:HikariCP:5.1.0'
+    
+    // Logging (optional but recommended)
+    implementation 'org.slf4j:slf4j-api:2.0.13'
+    implementation 'org.slf4j:slf4j-simple:2.0.13'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+// Default main class for running the server
+application {
+    mainClass = 'chat.server.TcpChatServer'
+}
+
+// Task to run the chat client
+task runClient(type: JavaExec) {
+    group = 'application'
+    description = 'Run the chat client'
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'chat.client.ChatClient'
+    standardInput = System.in
+}
+
+// Task to run the chat server
+task runServer(type: JavaExec) {
+    group = 'application'
+    description = 'Run the chat server'
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'chat.server.TcpChatServer'
+}
+
+// Task to run the voice server
+task runVoiceServer(type: JavaExec) {
+    group = 'application'
+    description = 'Run the voice server'
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'chat.server.VoiceServer'
+}
+
+// Create executable JARs
+jar {
+    manifest {
+        attributes(
+            'Main-Class': 'chat.server.TcpChatServer'
+        )
+    }
+    // Include dependencies in the JAR
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+// Task to create client JAR
+task clientJar(type: Jar) {
+    group = 'build'
+    description = 'Create executable JAR for chat client'
+    archiveBaseName = 'chat-client'
+    manifest {
+        attributes(
+            'Main-Class': 'chat.client.ChatClient'
+        )
+    }
+    from sourceSets.main.output
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+// Task to create server JAR
+task serverJar(type: Jar) {
+    group = 'build'
+    description = 'Create executable JAR for chat server'
+    archiveBaseName = 'chat-server'
+    manifest {
+        attributes(
+            'Main-Class': 'chat.server.TcpChatServer'
+        )
+    }
+    from sourceSets.main.output
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
