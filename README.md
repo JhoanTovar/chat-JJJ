@@ -1,7 +1,15 @@
 
-# Aplicación de Chat con Persistencia en PostgreSQL
+# chat-JJJ con Persistencia en PostgreSQL
 
-Una aplicación de chat estilo **WhatsApp**, desarrollada en **Java**, con comunicación **TCP/UDP** y persistencia de datos en una **base de datos PostgreSQL local**.
+Jhoan Manuel Tovar
+
+
+Juan Pablo Martinez
+
+
+Juan Felipe Sinisterra
+
+# Una aplicación de chat estilo **WhatsApp**, desarrollada en **Java**, con comunicación **TCP/UDP** y persistencia de datos en una **base de datos PostgreSQL local**.
 
 ## Características
 
@@ -27,7 +35,7 @@ Una aplicación de chat estilo **WhatsApp**, desarrollada en **Java**, con comun
 * **Java 17** o superior
 * **Gradle** instalado
 
-### ⚙️ Configuración básica
+### Configuración básica
 
 Esta aplicación utiliza una **base de datos local** por defecto.
 Es decir, PostgreSQL debe estar instalado y ejecutándose en el mismo computador donde corre el servidor Java.
@@ -95,31 +103,31 @@ La aplicación crea automáticamente las siguientes tablas:
 ### 1. Compilar el proyecto
 
 ```bash
-./gradlew build
+./gradle build
 ```
 
 ### 2. Ejecutar el servidor principal
 
 ```bash
-./gradlew runServer
+./gradle runServer
 ```
 
 ### 3. Ejecutar el servidor de voz (para llamadas)
 
 ```bash
-./gradlew runVoiceServer
+./gradle runVoiceServer
 ```
 
 
 ### 4. Ejecutar un cliente
 
 ```bash
-./gradlew runClient
+./gradle runClient
 ```
 
 ---
 
-## 💡 Uso
+## Uso
 
 1. Inicia primero el **servidor principal y el de voz**
 2. Luego ejecuta uno o varios **clientes** (pueden estar en otros equipos de la red local)

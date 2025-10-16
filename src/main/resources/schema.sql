@@ -1,4 +1,4 @@
--- Database schema for PostgreSQL persistence (moved to resources for classpath access)
+
 
 -- Users table
 CREATE TABLE IF NOT EXISTS users (

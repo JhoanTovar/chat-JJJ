@@ -61,10 +61,10 @@ public class ChatClient {
 
     private void authenticate() {
         while (currentUser == null) {
-            System.out.println("1. Iniciar sesión");
+            System.out.println("1. Iniciar sesion");
             System.out.println("2. Registrarse");
             System.out.println("3. Salir");
-            System.out.print("\nSeleccione una opción: ");
+            System.out.print("\nSeleccione una opcion: ");
 
             String option;
             synchronized (scannerLock) {
@@ -86,7 +86,7 @@ public class ChatClient {
                     running = false;
                     return;
                 default:
-                    System.out.println("Opción inválida");
+                    System.out.println("Opción invalida");
             }
         }
     }
@@ -128,8 +128,8 @@ public class ChatClient {
             System.out.println("8. Realizar llamada");
             System.out.println("9. Enviar nota de voz");
             System.out.println("10. Ver usuarios");
-            System.out.println("11. Cerrar sesión");
-            System.out.print("\nSeleccione una opción: ");
+            System.out.println("11. Cerrar sesion");
+            System.out.print("\nSeleccione una opcion: ");
 
             String option;
             synchronized (scannerLock) {
@@ -175,7 +175,7 @@ public class ChatClient {
                     logout();
                     return;
                 default:
-                    System.out.println("Opción inválida");
+                    System.out.println("Opción invalida");
             }
         }
     }
@@ -187,7 +187,7 @@ public class ChatClient {
             receiverIdStr = scanner.nextLine().trim();
         }
         if (receiverIdStr.isEmpty()) {
-            System.out.println("Error: Debe ingresar un ID válido");
+            System.out.println("Error: Debe ingresar un ID valido");
             return;
         }
 
@@ -195,7 +195,7 @@ public class ChatClient {
         try {
             receiverId = Integer.parseInt(receiverIdStr);
         } catch (NumberFormatException e) {
-            System.out.println("Error: ID inválido");
+            System.out.println("Error: ID invalido");
             return;
         }
 
@@ -206,7 +206,7 @@ public class ChatClient {
         }
 
         if (content.trim().isEmpty()) {
-            System.out.println("Error: El mensaje no puede estar vacío");
+            System.out.println("Error: El mensaje no puede estar vacio");
             return;
         }
 
@@ -224,7 +224,7 @@ public class ChatClient {
             userIdStr = scanner.nextLine().trim();
         }
         if (userIdStr.isEmpty()) {
-            System.out.println("Error: Debe ingresar un ID válido");
+            System.out.println("Error: Debe ingresar un ID valido");
             return;
         }
 
@@ -232,7 +232,7 @@ public class ChatClient {
         try {
             userId = Integer.parseInt(userIdStr);
         } catch (NumberFormatException e) {
-            System.out.println("Error: ID inválido");
+            System.out.println("Error: ID invalido");
             return;
         }
 
@@ -248,7 +248,7 @@ public class ChatClient {
         }
 
         if (groupName.isEmpty()) {
-            System.out.println("Error: El nombre del grupo no puede estar vacío");
+            System.out.println("Error: El nombre del grupo no puede estar vacio");
             return;
         }
 
@@ -263,7 +263,7 @@ public class ChatClient {
             groupIdStr = scanner.nextLine().trim();
         }
         if (groupIdStr.isEmpty()) {
-            System.out.println("Error: Debe ingresar un ID válido");
+            System.out.println("Error: Debe ingresar un ID valido");
             return;
         }
 
@@ -271,7 +271,7 @@ public class ChatClient {
         try {
             groupId = Integer.parseInt(groupIdStr);
         } catch (NumberFormatException e) {
-            System.out.println("Error: ID inválido");
+            System.out.println("Error: ID invalido");
             return;
         }
 
@@ -282,7 +282,7 @@ public class ChatClient {
         }
 
         if (content.trim().isEmpty()) {
-            System.out.println("Error: El mensaje no puede estar vacío");
+            System.out.println("Error: El mensaje no puede estar vacio");
             return;
         }
 
@@ -300,7 +300,7 @@ public class ChatClient {
             groupIdStr = scanner.nextLine().trim();
         }
         if (groupIdStr.isEmpty()) {
-            System.out.println("Error: Debe ingresar un ID válido");
+            System.out.println("Error: Debe ingresar un ID valido");
             return;
         }
 
@@ -308,7 +308,7 @@ public class ChatClient {
         try {
             groupId = Integer.parseInt(groupIdStr);
         } catch (NumberFormatException e) {
-            System.out.println("Error: ID inválido");
+            System.out.println("Error: ID invalido");
             return;
         }
 
@@ -319,7 +319,7 @@ public class ChatClient {
     private void makeCall() {
         System.out.println("\n1. Llamar a un usuario");
         System.out.println("2. Llamar a un grupo");
-        System.out.print("Seleccione una opción: ");
+        System.out.print("Seleccione una opcion: ");
 
         String option;
         synchronized (scannerLock) {
@@ -331,7 +331,7 @@ public class ChatClient {
         } else if (option.equals("2")) {
             makeGroupCall();
         } else {
-            System.out.println("Opción inválida");
+            System.out.println("Opción invalida");
         }
     }
 
@@ -342,7 +342,7 @@ public class ChatClient {
             receiverIdStr = scanner.nextLine().trim();
         }
         if (receiverIdStr.isEmpty()) {
-            System.out.println("Error: Debe ingresar un ID válido");
+            System.out.println("Error: Debe ingresar un ID valido");
             return;
         }
 
@@ -350,7 +350,7 @@ public class ChatClient {
         try {
             receiverId = Integer.parseInt(receiverIdStr);
         } catch (NumberFormatException e) {
-            System.out.println("Error: ID inválido");
+            System.out.println("Error: ID invalido");
             return;
         }
 
@@ -361,7 +361,7 @@ public class ChatClient {
         }
 
         if (receiverUsername.isEmpty()) {
-            System.out.println("Error: El nombre no puede estar vacío");
+            System.out.println("Error: El nombre no puede estar vacio");
             return;
         }
 
@@ -371,7 +371,7 @@ public class ChatClient {
         Packet packet = new Packet(Command.CALL_REQUEST, Protocol.toJson(call));
         sendPacket(packet);
 
-        System.out.println("\nLlamando a " + receiverUsername + "... (usando TCP para señalización)");
+        System.out.println("\nLlamando a " + receiverUsername + "... (usando TCP para señalizacion)");
     }
 
     private void makeGroupCall() {
@@ -381,7 +381,7 @@ public class ChatClient {
             groupIdStr = scanner.nextLine().trim();
         }
         if (groupIdStr.isEmpty()) {
-            System.out.println("Error: Debe ingresar un ID válido");
+            System.out.println("Error: Debe ingresar un ID valido");
             return;
         }
 
@@ -389,7 +389,7 @@ public class ChatClient {
         try {
             groupId = Integer.parseInt(groupIdStr);
         } catch (NumberFormatException e) {
-            System.out.println("Error: ID inválido");
+            System.out.println("Error: ID invalido");
             return;
         }
 
@@ -400,7 +400,7 @@ public class ChatClient {
         }
 
         if (groupName.isEmpty()) {
-            System.out.println("Error: El nombre no puede estar vacío");
+            System.out.println("Error: El nombre no puede estar vacio");
             return;
         }
 
@@ -411,13 +411,13 @@ public class ChatClient {
         Packet packet = new Packet(Command.CALL_REQUEST, Protocol.toJson(call));
         sendPacket(packet);
 
-        System.out.println("\nLlamando al grupo " + groupName + "... (usando TCP para señalización)");
+        System.out.println("\nLlamando al grupo " + groupName + "... (usando TCP para señalizacion)");
     }
 
     private void sendVoiceNote() {
         System.out.println("\n1. Enviar nota de voz a usuario");
         System.out.println("2. Enviar nota de voz a grupo");
-        System.out.print("Seleccione una opción: ");
+        System.out.print("Seleccione una opcion: ");
 
         String option;
         synchronized (scannerLock) {
@@ -429,7 +429,7 @@ public class ChatClient {
         } else if (option.equals("2")) {
             sendVoiceNoteToGroup();
         } else {
-            System.out.println("Opción inválida");
+            System.out.println("Opción invalida");
         }
     }
 
@@ -440,7 +440,7 @@ public class ChatClient {
             receiverIdStr = scanner.nextLine().trim();
         }
         if (receiverIdStr.isEmpty()) {
-            System.out.println("Error: Debe ingresar un ID válido");
+            System.out.println("Error: Debe ingresar un ID valido");
             return;
         }
 
@@ -448,11 +448,11 @@ public class ChatClient {
         try {
             receiverId = Integer.parseInt(receiverIdStr);
         } catch (NumberFormatException e) {
-            System.out.println("Error: ID inválido");
+            System.out.println("Error: ID invalido");
             return;
         }
 
-        System.out.print("Duración del audio (segundos): ");
+        System.out.print("Duracion del audio (segundos): ");
         String durationStr;
         synchronized (scannerLock) {
             durationStr = scanner.nextLine().trim();
@@ -463,11 +463,11 @@ public class ChatClient {
             try {
                 duration = Integer.parseInt(durationStr);
                 if (duration <= 0) {
-                    System.out.println("Duración inválida, usando 5 segundos por defecto");
+                    System.out.println("Duracion invalida, usando 5 segundos por defecto");
                     duration = 5;
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Duración inválida, usando 5 segundos por defecto");
+                System.out.println("Duración invalida, usando 5 segundos por defecto");
             }
         } else {
             System.out.println("Usando duración por defecto: 5 segundos");
@@ -491,7 +491,7 @@ public class ChatClient {
             groupIdStr = scanner.nextLine().trim();
         }
         if (groupIdStr.isEmpty()) {
-            System.out.println("Error: Debe ingresar un ID válido");
+            System.out.println("Error: Debe ingresar un ID valido");
             return;
         }
 
@@ -499,11 +499,11 @@ public class ChatClient {
         try {
             groupId = Integer.parseInt(groupIdStr);
         } catch (NumberFormatException e) {
-            System.out.println("Error: ID inválido");
+            System.out.println("Error: ID invalido");
             return;
         }
 
-        System.out.print("Duración del audio (segundos): ");
+        System.out.print("Duracion del audio (segundos): ");
         String durationStr;
         synchronized (scannerLock) {
             durationStr = scanner.nextLine().trim();
@@ -514,14 +514,14 @@ public class ChatClient {
             try {
                 duration = Integer.parseInt(durationStr);
                 if (duration <= 0) {
-                    System.out.println("Duración inválida, usando 5 segundos por defecto");
+                    System.out.println("Duración invalida, usando 5 segundos por defecto");
                     duration = 5;
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Duración inválida, usando 5 segundos por defecto");
+                System.out.println("Duración invalida, usando 5 segundos por defecto");
             }
         } else {
-            System.out.println("Usando duración por defecto: 5 segundos");
+            System.out.println("Usando duracion por defecto: 5 segundos");
         }
 
         Message message = new Message(currentUser.getId(), currentUser.getUsername(),
@@ -572,7 +572,7 @@ public class ChatClient {
         Packet packet = new Packet(Command.LOGOUT);
         sendPacket(packet);
         running = false;
-        System.out.println("\nSesión cerrada");
+        System.out.println("\nSesion cerrada");
     }
 
     private void receiveMessages() {
@@ -584,7 +584,7 @@ public class ChatClient {
             }
         } catch (IOException e) {
             if (running) {
-                System.err.println("\nConexión perdida con el servidor.");
+                System.err.println("\nConexion perdida con el servidor.");
             }
         } finally {
             running = false; // Ensure running is false if connection is lost
@@ -627,7 +627,7 @@ public class ChatClient {
         if (currentUser == null && packet.getData() != null) {
             // Respuesta de login/register
             currentUser = Protocol.fromJson(packet.getData(), User.class);
-            System.out.println("\nAutenticación exitosa");
+            System.out.println("\nAutenticacion exitosa");
         } else if (packet.getData() != null && packet.getData().startsWith("[")) {
             // Lista de mensajes, usuarios o grupos
             if (packet.getData().contains("\"username\"")) {
@@ -692,7 +692,7 @@ public class ChatClient {
                 System.out.println("\nLlamada aceptada. Conectando audio por UDP...");
                 if (voiceClient != null) {
                     voiceClient.startCall(call.getCallerId());
-                    System.out.println("Llamada en curso (TCP: señalización, UDP: audio)");
+                    System.out.println("Llamada en curso");
                     System.out.println("Presione Enter para finalizar la llamada");
 
                     synchronized (scannerLock) {
@@ -717,7 +717,7 @@ public class ChatClient {
                 System.out.println("\nLlamada rechazada");
             }
         } catch (TimeoutException e) {
-            System.out.println("\nTiempo de espera agotado. Llamada rechazada automáticamente.");
+            System.out.println("\nTiempo de espera agotado. Llamada rechazada automaticamente.");
             Packet rejectPacket = new Packet(Command.CALL_REJECT, Protocol.toJson(call));
             sendPacket(rejectPacket);
             future.cancel(true);
@@ -741,7 +741,7 @@ public class ChatClient {
 
         if (voiceClient != null) {
             voiceClient.startCall(call.getReceiverId());
-            System.out.println("Llamada en curso (TCP: señalización, UDP: audio)");
+            System.out.println("Llamada en curso");
             System.out.println("Presione Enter para finalizar la llamada");
 
             ExecutorService executor = Executors.newSingleThreadExecutor();
@@ -828,7 +828,7 @@ public class ChatClient {
             groupIdStr = scanner.nextLine().trim();
         }
         if (groupIdStr.isEmpty()) {
-            System.out.println("Error: Debe ingresar un ID válido");
+            System.out.println("Error: Debe ingresar un ID valido");
             return;
         }
 
@@ -836,7 +836,7 @@ public class ChatClient {
         try {
             groupId = Integer.parseInt(groupIdStr);
         } catch (NumberFormatException e) {
-            System.out.println("Error: ID de grupo inválido");
+            System.out.println("Error: ID de grupo invalido");
             return;
         }
 
@@ -846,7 +846,7 @@ public class ChatClient {
             userIdStr = scanner.nextLine().trim();
         }
         if (userIdStr.isEmpty()) {
-            System.out.println("Error: Debe ingresar un ID válido");
+            System.out.println("Error: Debe ingresar un ID valido");
             return;
         }
 
@@ -854,7 +854,7 @@ public class ChatClient {
         try {
             userId = Integer.parseInt(userIdStr);
         } catch (NumberFormatException e) {
-            System.out.println("Error: ID de usuario inválido");
+            System.out.println("Error: ID de usuario invalido");
             return;
         }
 
@@ -865,7 +865,7 @@ public class ChatClient {
     private void displayGroups(List<Group> groups) {
         System.out.println("\n============ MIS GRUPOS ============");
         if (groups == null || groups.isEmpty()) {
-            System.out.println("No perteneces a ningún grupo");
+            System.out.println("No perteneces a ningun grupo");
         } else {
             for (Group group : groups) {
                 System.out.println("ID: " + group.getId() + " - " + group);
@@ -878,7 +878,7 @@ public class ChatClient {
         if (out != null && !socket.isClosed()) {
             out.println(Protocol.serialize(packet));
         } else {
-            System.err.println("Error: No se puede enviar paquete. Conexión cerrada o no inicializada.");
+            System.err.println("Error: No se puede enviar paquete. Conexion cerrada o no inicializada.");
         }
     }
 
@@ -923,7 +923,7 @@ public class ChatClient {
             chat.audio.AudioPlayback playback = new chat.audio.AudioPlayback();
             playback.playAudio(audioData);
 
-            System.out.println("Reproducción completada");
+            System.out.println("Reproduccion completada");
 
         } catch (Exception e) {
             System.err.println("Error reproduciendo nota de voz: " + e.getMessage());
