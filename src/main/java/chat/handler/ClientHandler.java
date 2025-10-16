@@ -70,7 +70,7 @@ public class ClientHandler implements Runnable {
 
                 case LOGOUT:
                     controller.handleLogout(currentUser.getId());
-                    send(new Packet(Command.SUCCESS, "Sesión cerrada"));
+                    send(new Packet(Command.SUCCESS, "Sesion cerrada"));
                     break;
 
                 case SEND_MESSAGE:
@@ -188,7 +188,7 @@ public class ClientHandler implements Runnable {
                         sendError("Usuario no disponible");
                     }
                 } else {
-                    sendError("ID de destinatario inválido");
+                    sendError("ID de destinatario invalido");
                 }
             }
         } catch (Exception e) {

@@ -102,7 +102,7 @@ public class VoiceClient {
                         System.err.println("Error en listener de audio: " + e.getMessage());
                     }
                 } catch (LineUnavailableException e) {
-                    System.err.println("Error iniciando reproducción: " + e.getMessage());
+                    System.err.println("Error iniciando reproduccion: " + e.getMessage());
                 }
             }
         });

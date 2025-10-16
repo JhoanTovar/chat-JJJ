@@ -54,7 +54,7 @@ public class DatabaseConfig {
 
             var schemaStream = getClass().getClassLoader().getResourceAsStream("schema.sql");
             if (schemaStream == null) {
-                System.out.println("No se encontro schema.sql en resources, se omite inicialización.");
+                System.out.println("No se encontro schema.sql en resources, se omite inicializacion.");
                 return;
             }
 

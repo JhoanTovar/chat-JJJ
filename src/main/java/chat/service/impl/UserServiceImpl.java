@@ -16,7 +16,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User register(String username) throws Exception {
         if (username == null || username.trim().isEmpty()) {
-            throw new Exception("El nombre de usuario no puede estar vacío");
+            throw new Exception("El nombre de usuario no puede estar vacio");
         }
         
         if (userRepository.existsByUsername(username)) {

@@ -59,7 +59,7 @@ public class ClientRegistry {
                         member.send(notification);
                         System.out.println("Nota de voz enviada a miembro " + memberId);
                     } else {
-                        System.out.println("Miembro " + memberId + " no está conectado");
+                        System.out.println("Miembro " + memberId + " no esta conectado");
                     }
                 }
             }
